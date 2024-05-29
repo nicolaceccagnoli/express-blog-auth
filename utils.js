@@ -59,7 +59,7 @@ const generateToken = (user) => {
     // Assegno le credenziali dell'utente ad una variabile payload
     const payload = user;
     // Creo il token
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: "1m"});
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: "1h"});
     return token;
 };
 

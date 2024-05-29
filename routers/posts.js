@@ -8,15 +8,17 @@ const multer = require("multer");
 // Dichiaro una costante che indicherà dove verranno salvati i file in upload
 const uploader = multer({dest: "public"});
 
+// Importo il middleware per limitare l'accesso alle rotte agli utenti loggati
+const authenticateWithJWT = require('../middleware/authenticateWithJWT.js');
+
 router.get('/', postsController.index);
 
-router.post('/', uploader.single('image'), postsController.create);
+router.post('/', authenticateWithJWT, uploader.single('image'), postsController.create);
 
 router.get('/:slug', postsController.show);
 
 router.get('/:slug/download', postsController.download);
 
 router.delete('/:slug', postsController.destroy);
-
 
 module.exports = router
