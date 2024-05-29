@@ -7,6 +7,10 @@ const port = 3000;
 
 // Invoco il controller
 const postsRouter = require("./routers/posts.js");
+
+// Invoco il controller auth
+const auth = require('./controllers/auth.js');
+
 // Importo il middleware per le richieste HTTP
 const routersLogger = require('./middleware/routersLogger.js');
 // Importo il middleware per la gestione degli errori
@@ -24,6 +28,8 @@ app.use(routersLogger);
 app.use(express.json());
 // application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
+
+app.post('/home', auth.generateToken);
 
 // Definisco le mie rotte
 app.use('/posts', postsRouter);
