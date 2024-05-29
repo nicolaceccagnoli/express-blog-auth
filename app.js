@@ -5,8 +5,11 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-// Invoco il controller
+// Invoco il router dei post
 const postsRouter = require("./routers/posts.js");
+
+// Invoco il router dell'autenticazione
+const authRouter = require('./routers/auth.js');
 
 // Invoco il controller auth
 const auth = require('./controllers/auth.js');
@@ -29,7 +32,7 @@ app.use(express.json());
 // application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-app.post('/home', auth.home);
+app.use('/login', auth.login);
 
 // Definisco le mie rotte
 app.use('/posts', postsRouter);

@@ -4,7 +4,7 @@ const users = require("../db/users.json");
 const { generateToken } = require("../utils");
  
 // Funzione per la home
-const home = (req, res) => {
+const login = (req, res) => {
     // Estraggo le credenziali dell'utente dalla request del body
     const { username, password} = req.body;
     // Trovo la corrispondenza tra le credenziali inserite e uno degli utenti
@@ -22,5 +22,5 @@ const home = (req, res) => {
 }
 
 module.exports = {
-    home
+    login
 }
