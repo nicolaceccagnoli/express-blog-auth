@@ -1,21 +1,8 @@
-// Importo la libreria di jsonwebtoken
-const jwt = require("jsonwebtoken");
-// Carico le variabili d'ambiente
-require("dotenv").config();
 // Importo il db degli utenti
 const users = require("../db/users.json");
 
-// Creo una funzione per generare il token
-const generateToken = (user) => {
-    // Assegno le credenziali dell'utente ad una variabile payload
-    const payload = user;
-    // Creo il token
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: "1m"});
-    return token;
-};
-
-
-
+const { generateToken } = require("../utils");
+ 
 // Funzione per la home
 const home = (req, res) => {
     // Estraggo le credenziali dell'utente dalla request del body
@@ -35,6 +22,5 @@ const home = (req, res) => {
 }
 
 module.exports = {
-    generateToken,
     home
 }

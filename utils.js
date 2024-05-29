@@ -1,6 +1,16 @@
 // Importo Path per creare percorsi ai file
 const path = require('path');
 
+// Importo il db degli utenti
+const users = require("./db/users.json");
+
+// Carico le variabili d'ambiente
+require("dotenv").config();
+
+// Importo la libreria di jsonwebtoken
+const jwt = require("jsonwebtoken");
+
+
 // Importo i posts
 let posts = require('./db/posts.json');
 
@@ -44,10 +54,21 @@ const updatePosts = (newPosts) => {
     fs.writeFileSync(filePath, JSON.stringify(newPosts));
 }
 
+// Creo una funzione per generare il token
+const generateToken = (user) => {
+    // Assegno le credenziali dell'utente ad una variabile payload
+    const payload = user;
+    // Creo il token
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: "1m"});
+    return token;
+};
+
+
 // Esporto i moduli
 module.exports = {
     path,
     createSlug,
     deletePublicFile,
-    updatePosts
+    updatePosts,
+    generateToken
 }

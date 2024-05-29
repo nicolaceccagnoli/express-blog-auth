@@ -29,7 +29,7 @@ app.use(express.json());
 // application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-app.post('/home', auth.generateToken);
+app.post('/home', auth.home);
 
 // Definisco le mie rotte
 app.use('/posts', postsRouter);
