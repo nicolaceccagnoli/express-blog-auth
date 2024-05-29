@@ -176,8 +176,8 @@ const destroy = (req, res) => {
 
     // Elimino l'immagine del post
     deletePublicFile(postToDelete.image);
-    const newPosts = posts.filter(p => p.slug !== postToDelete.slug);
-    updatePosts(newPosts);
+    posts = posts.filter(p => p.slug !== postToDelete.slug);
+    updatePosts(posts);
 
     res.send(`Post con slug ${slug} eliminato con successo.`);
 }

@@ -11,14 +11,17 @@ const uploader = multer({dest: "public"});
 // Importo il middleware per limitare l'accesso alle rotte agli utenti loggati
 const authenticateWithJWT = require('../middleware/authenticateWithJWT.js');
 
+// Importo il middleware per proteggere le rotte riservate agli admin
+const isAdmin = require('../middleware/isAdmin.js');
+
 router.get('/', postsController.index);
 
-router.post('/', authenticateWithJWT, uploader.single('image'), postsController.create);
+router.post('/', authenticateWithJWT, isAdmin, uploader.single('image'), postsController.create);
 
 router.get('/:slug', postsController.show);
 
 router.get('/:slug/download', postsController.download);
 
-router.delete('/:slug', postsController.destroy);
+router.delete('/:slug', authenticateWithJWT, isAdmin, postsController.destroy);
 
 module.exports = router

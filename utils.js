@@ -44,9 +44,10 @@ const createSlug = (name) => {
 // Creo una funzione per l'eliminazione del file da public
 const deletePublicFile = (fileName) => {
     const filePath = path.join(__dirname, './public', fileName);
-    fs.unlinkSync(filePath);
+    if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+    }
 }
-
 // Creo una funzione per aggiornare i Posts
 const updatePosts = (newPosts) => {
     const filePath = path.join(__dirname, './db/posts.json');
